@@ -20,6 +20,11 @@ export default function Home() {
       justifyContent={"center"}
       alignItems={"center"}
     >
+      <Box width="800px" height="100px" bgcolor={"f0f0f0"}>
+        <Typography variant={"h2"} color={"#333"} textAlign={"center"}>
+          Pantry Items
+        </Typography>
+      </Box>
       <Stack width="800px" height="600px" spacing={2} overflow={"auto"}>
         {item.map((i) => (
           <Box
