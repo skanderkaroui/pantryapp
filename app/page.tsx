@@ -15,8 +15,8 @@ export default function Home() {
         {item.map((i) => (
           <Box
             key={i}
-            width="100vw"
-            height="100vh"
+            width="100%"
+            height="100px"
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
