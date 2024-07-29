@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/material";
 
-const item = ["onion", "tomato", "potato", "garlic"]
+const item = ["onion", "tomato", "potato", "garlic"];
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       alignItems={"center"}
     >
       <Stack width="800px" height="600px" spacing={2}>
-        {item.map((i) => {
+        {item.map((i) => (
           <Box
             key={i}
             width="100vw"
@@ -24,9 +24,8 @@ export default function Home() {
           >
             {i}
           </Box>
-        })}
-      
+        ))}
       </Stack>
     </Box>
-  )
+  );
 }
