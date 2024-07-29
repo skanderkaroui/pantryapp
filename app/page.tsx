@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/material";
 
-const item = ["onion", "tomato", "potato", "garlic"];
+const item = ["onion", "tomato", "potato", "garlic", "letuce","spinach","cucumber","kale"];
 
 export default function Home() {
   return (
