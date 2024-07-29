@@ -31,12 +31,7 @@ export default function Home() {
             alignItems={"center"}
             bgcolor={"#f0f0f0"}
           >
-            <Typography
-              variant={"h4"}
-              color={"#333"}
-              textAlign={"center"}
-              fontWeight={"bold"}
-            >
+            <Typography variant={"h3"} color={"#333"} textAlign={"center"}>
               {i.charAt(0).toUpperCase() + i.slice(1)}
             </Typography>
           </Box>
