@@ -26,37 +26,37 @@ export default function Home() {
     <Box
       width="100vw"
       height="100vh"
-      display={"flex"}
-      justifyContent={"center"}
-      flexDirection={"column"}
-      alignItems={"center"}
+      display="flex"
+      justifyContent="center"
+      flexDirection="column"
+      alignItems="center"
     >
       <Box
         width="800px"
         height="100px"
-        bgcolor={"#ADD8E6"}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        border={"1px solid #333"}
+        bgcolor="#ADD8E6"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        border="1px solid #333"
       >
-        <Typography variant={"h2"} color={"#333"} textAlign={"center"}>
+        <Typography variant="h2" color="#333" textAlign="center">
           Pantry Items
         </Typography>
       </Box>
-      <Stack width="800px" height="600px" spacing={2} overflow={"auto"}>
-        {pantry.map((i) => (
+      <Stack width="800px" height="600px" spacing={2} overflow="auto">
+        {pantry.map((item) => (
           <Box
-            key={i}
+            key={item}
             width="100%"
             height="100px"
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            bgcolor={"#f0f0f0"}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            bgcolor="#f0f0f0"
           >
-            <Typography variant={"h3"} color={"#333"} textAlign={"center"}>
-              {i.charAt(0).toUpperCase() + i.slice(1)}
+            <Typography variant="h3" color="#333" textAlign="center">
+              {item.charAt(0).toUpperCase() + item.slice(1)}
             </Typography>
           </Box>
         ))}
