@@ -1,5 +1,7 @@
+"use client";
+
 import { firestore } from "@/firebase";
-import { collection } from "@firebase/firestore";
+import { collection, getDocs, query } from "@firebase/firestore";
 import { Box, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 const item = [
@@ -15,7 +17,14 @@ const item = [
 
 export default function Home() {
   useEffect(() => {
-    const items = collection(firestore, "items");
+    const updatePantry = async () => {
+      const snapshot = query(collection(firestore, "pantry"));
+      const docs = await getDocs(snapshot);
+      docs.forEach((doc) => {
+        console.log(doc.id, doc.data());
+      });
+    };
+    updatePantry();
   }, []);
 
   return (
