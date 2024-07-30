@@ -4,25 +4,17 @@ import { firestore } from "@/firebase";
 import { collection, getDocs, query } from "@firebase/firestore";
 import { Box, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
-const item = [
-  "onion",
-  "tomato",
-  "potato",
-  "garlic",
-  "letuce",
-  "spinach",
-  "cucumber",
-  "kale",
-];
 
 export default function Home() {
   useEffect(() => {
     const updatePantry = async () => {
       const snapshot = query(collection(firestore, "pantry"));
       const docs = await getDocs(snapshot);
+      const pantryList: string[] = [];
       docs.forEach((doc) => {
-        console.log(doc.id, doc.data());
+        pantryList.push(doc.id);
       });
+      console.log(pantryList);
     };
     updatePantry();
   }, []);
