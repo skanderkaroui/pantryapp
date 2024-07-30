@@ -1,5 +1,7 @@
+import { firestore } from "@/firebase";
+import { collection } from "@firebase/firestore";
 import { Box, Stack, Typography } from "@mui/material";
-
+import { useEffect } from "react";
 const item = [
   "onion",
   "tomato",
@@ -12,6 +14,10 @@ const item = [
 ];
 
 export default function Home() {
+  useEffect(() => {
+    const items = collection(firestore, "items");
+  }, []);
+
   return (
     <Box
       width="100vw"
@@ -27,7 +33,7 @@ export default function Home() {
         bgcolor={"#ADD8E6"}
         display={"flex"}
         justifyContent={"center"}
-        alignItems={'center'}
+        alignItems={"center"}
         border={"1px solid #333"}
       >
         <Typography variant={"h2"} color={"#333"} textAlign={"center"}>
