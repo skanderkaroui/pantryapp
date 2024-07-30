@@ -3,9 +3,11 @@
 import { firestore } from "@/firebase";
 import { collection, getDocs, query } from "@firebase/firestore";
 import { Box, Stack, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [pantry, setPantry] = useState<string[]>([]);
+
   useEffect(() => {
     const updatePantry = async () => {
       const snapshot = query(collection(firestore, "pantry"));
@@ -15,6 +17,7 @@ export default function Home() {
         pantryList.push(doc.id);
       });
       console.log(pantryList);
+      setPantry(pantryList);
     };
     updatePantry();
   }, []);
@@ -42,7 +45,7 @@ export default function Home() {
         </Typography>
       </Box>
       <Stack width="800px" height="600px" spacing={2} overflow={"auto"}>
-        {item.map((i) => (
+        {pantry.map((i) => (
           <Box
             key={i}
             width="100%"
