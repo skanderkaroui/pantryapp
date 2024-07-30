@@ -72,10 +72,13 @@ export default function Home() {
               label="Item"
               variant="outlined"
             ></TextField>
-            <Button variant="contained">Add</Button>
+            <Button variant="outlined">Add</Button>
           </Stack>
         </Box>
       </Modal>
+      <Button variant="contained" onClick={handleOpen}>
+        Add
+      </Button>
       <Box
         width="800px"
         height="100px"
