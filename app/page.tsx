@@ -1,7 +1,7 @@
 "use client";
 
 import { firestore } from "@/firebase";
-import { collection, getDocs, query } from "@firebase/firestore";
+import { collection, getDocs, query, addDoc, deleteDoc, doc } from "@firebase/firestore";
 import {
   Box,
   Button,
@@ -32,19 +32,36 @@ export default function Home() {
 
   const [itemName, setItemName] = useState("");
 
+  const updatePantry = async () => {
+    const snapshot = query(collection(firestore, "pantry"));
+    const docs = await getDocs(snapshot);
+    const pantryList: string[] = [];
+    docs.forEach((doc) => {
+      pantryList.push(doc.id);
+    });
+    console.log(pantryList);
+    setPantry(pantryList);
+  };
+
   useEffect(() => {
-    const updatePantry = async () => {
-      const snapshot = query(collection(firestore, "pantry"));
-      const docs = await getDocs(snapshot);
-      const pantryList: string[] = [];
-      docs.forEach((doc) => {
-        pantryList.push(doc.id);
-      });
-      console.log(pantryList);
-      setPantry(pantryList);
-    };
     updatePantry();
   }, []);
+
+  const handleAddItem = async () => {
+    if (itemName.trim() !== "") {
+      await addDoc(collection(firestore, "pantry"), {
+        name: itemName.trim().toLowerCase()
+      });
+      setItemName("");
+      handleClose();
+      updatePantry();
+    }
+  };
+
+  const handleDeleteItem = async (item: string) => {
+    await deleteDoc(doc(firestore, "pantry", item));
+    updatePantry();
+  };
 
   return (
     <Box
@@ -68,11 +85,13 @@ export default function Home() {
           </Typography>
           <Stack width="100%" direction={"row"} spacing={2}>
             <TextField
-              id="outined-basic"
+              id="outlined-basic"
               label="Item"
               variant="outlined"
-            ></TextField>
-            <Button variant="outlined">Add</Button>
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+            />
+            <Button variant="outlined" onClick={handleAddItem}>Add</Button>
           </Stack>
         </Box>
       </Modal>
@@ -99,13 +118,17 @@ export default function Home() {
             width="100%"
             minHeight="100px"
             display="flex"
-            justifyContent="center"
+            justifyContent="space-between"
             alignItems="center"
             bgcolor="#f0f0f0"
+            padding="0 20px"
           >
-            <Typography variant="h3" color="#333" textAlign="center">
+            <Typography variant="h3" color="#333">
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </Typography>
+            <Button variant="outlined" color="error" onClick={() => handleDeleteItem(item)}>
+              Delete
+            </Button>
           </Box>
         ))}
       </Stack>
