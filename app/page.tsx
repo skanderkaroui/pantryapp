@@ -24,8 +24,13 @@ const style = {
   p: 4,
 };
 
+interface PantryItem {
+  id: string;
+  name: string;
+}
+
 export default function Home() {
-  const [pantry, setPantry] = useState<string[]>([]);
+  const [pantry, setPantry] = useState<PantryItem[]>([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,9 +40,9 @@ export default function Home() {
   const updatePantry = async () => {
     const snapshot = query(collection(firestore, "pantry"));
     const docs = await getDocs(snapshot);
-    const pantryList: string[] = [];
+    const pantryList: PantryItem[] = [];
     docs.forEach((doc) => {
-      pantryList.push(doc.id);
+      pantryList.push({ id: doc.id, name: doc.data().name });
     });
     console.log(pantryList);
     setPantry(pantryList);
@@ -50,7 +55,7 @@ export default function Home() {
   const handleAddItem = async () => {
     if (itemName.trim() !== "") {
       await addDoc(collection(firestore, "pantry"), {
-        name: itemName.trim().toLowerCase()
+        name: itemName.trim()
       });
       setItemName("");
       handleClose();
@@ -58,8 +63,8 @@ export default function Home() {
     }
   };
 
-  const handleDeleteItem = async (item: string) => {
-    await deleteDoc(doc(firestore, "pantry", item));
+  const handleDeleteItem = async (id: string) => {
+    await deleteDoc(doc(firestore, "pantry", id));
     updatePantry();
   };
 
@@ -114,7 +119,7 @@ export default function Home() {
       <Stack width="800px" height="600px" spacing={2} overflow="auto">
         {pantry.map((item) => (
           <Box
-            key={item}
+            key={item.id}
             width="100%"
             minHeight="100px"
             display="flex"
@@ -124,9 +129,9 @@ export default function Home() {
             padding="0 20px"
           >
             <Typography variant="h3" color="#333">
-              {item.charAt(0).toUpperCase() + item.slice(1)}
+              {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
             </Typography>
-            <Button variant="outlined" color="error" onClick={() => handleDeleteItem(item)}>
+            <Button variant="outlined" color="error" onClick={() => handleDeleteItem(item.id)}>
               Delete
             </Button>
           </Box>
