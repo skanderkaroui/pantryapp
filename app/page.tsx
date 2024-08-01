@@ -1,7 +1,14 @@
 "use client";
 
 import { firestore } from "@/firebase";
-import { collection, getDocs, query, addDoc, deleteDoc, doc } from "@firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  addDoc,
+  deleteDoc,
+  doc,
+} from "@firebase/firestore";
 import {
   Box,
   Button,
@@ -55,7 +62,7 @@ export default function Home() {
   const handleAddItem = async () => {
     if (itemName.trim() !== "") {
       await addDoc(collection(firestore, "pantry"), {
-        name: itemName.trim()
+        name: itemName.trim(),
       });
       setItemName("");
       handleClose();
@@ -96,7 +103,9 @@ export default function Home() {
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
             />
-            <Button variant="outlined" onClick={handleAddItem}>Add</Button>
+            <Button variant="outlined" onClick={handleAddItem}>
+              Add
+            </Button>
           </Stack>
         </Box>
       </Modal>
@@ -129,9 +138,15 @@ export default function Home() {
             padding="0 20px"
           >
             <Typography variant="h3" color="#333">
-              {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+              {item.name
+                ? item.name.charAt(0).toUpperCase() + item.name.slice(1)
+                : "Unnamed item"}
             </Typography>
-            <Button variant="outlined" color="error" onClick={() => handleDeleteItem(item.id)}>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={() => handleDeleteItem(item.id)}
+            >
               Delete
             </Button>
           </Box>
