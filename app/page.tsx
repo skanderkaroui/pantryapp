@@ -2,16 +2,19 @@
 
 import { firestore } from "@/firebase";
 import {
-  collection,
-  getDocs,
-  query,
   addDoc,
+  collection,
   deleteDoc,
   doc,
+  getDocs,
+  query,
+  updateDoc
 } from "@firebase/firestore";
 import {
   Box,
   Button,
+  Chip,
+  IconButton,
   Modal,
   Stack,
   TextField,
@@ -34,6 +37,7 @@ const style = {
 interface PantryItem {
   id: string;
   name: string;
+  quantity: number;
 }
 
 export default function Home() {
@@ -49,7 +53,11 @@ export default function Home() {
     const docs = await getDocs(snapshot);
     const pantryList: PantryItem[] = [];
     docs.forEach((doc) => {
-      pantryList.push({ id: doc.id, name: doc.data().name });
+      pantryList.push({
+        id: doc.id,
+        name: doc.data().name,
+        quantity: doc.data().quantity || 1,
+      });
     });
     console.log(pantryList);
     setPantry(pantryList);
@@ -63,6 +71,7 @@ export default function Home() {
     if (itemName.trim() !== "") {
       await addDoc(collection(firestore, "pantry"), {
         name: itemName.trim(),
+        quantity: 1,
       });
       setItemName("");
       handleClose();
@@ -73,6 +82,15 @@ export default function Home() {
   const handleDeleteItem = async (id: string) => {
     await deleteDoc(doc(firestore, "pantry", id));
     updatePantry();
+  };
+
+  const handleUpdateQuantity = async (id: string, newQuantity: number) => {
+    if (newQuantity > 0) {
+      await updateDoc(doc(firestore, "pantry", id), { quantity: newQuantity });
+      updatePantry();
+    } else {
+      handleDeleteItem(id);
+    }
   };
 
   return (
@@ -125,6 +143,18 @@ export default function Home() {
           Pantry Items
         </Typography>
       </Box>
+
+      <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+        <Chip
+          label={`Total Items: ${pantry.reduce(
+            (sum, item) => sum + item.quantity,
+            0
+          )}`}
+          color="primary"
+          variant="outlined"
+        />
+      </Box>
+
       <Stack width="800px" height="600px" spacing={2} overflow="auto">
         {pantry.map((item) => (
           <Box
@@ -140,15 +170,31 @@ export default function Home() {
             <Typography variant="h3" color="#333">
               {item.name
                 ? item.name.charAt(0).toUpperCase() + item.name.slice(1)
-                : "Unnamed item"}
+                : "Unnamed Item"}
             </Typography>
-            <Button
-              variant="outlined"
-              color="error"
-              onClick={() => handleDeleteItem(item.id)}
-            >
-              Delete
-            </Button>
+            <Box display="flex" alignItems="center">
+              <Button
+                onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+              >
+                -
+              </Button>
+              <Typography variant="h6" sx={{ mx: 2 }}>
+                {item.quantity}
+              </Typography>
+              <Button
+                onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+              >
+                +
+              </Button>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => handleDeleteItem(item.id)}
+                sx={{ ml: 2 }}
+              >
+                Delete
+              </Button>
+            </Box>
           </Box>
         ))}
       </Stack>
