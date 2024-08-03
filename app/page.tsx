@@ -8,7 +8,7 @@ import {
   doc,
   getDocs,
   query,
-  updateDoc
+  updateDoc,
 } from "@firebase/firestore";
 import {
   Box,
