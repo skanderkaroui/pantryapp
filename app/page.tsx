@@ -86,10 +86,11 @@ interface PantryItem {
 export default function Home() {
   const [pantry, setPantry] = useState<PantryItem[]>([]);
   const [open, setOpen] = useState(false);
+  const [itemName, setItemName] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const [itemName, setItemName] = useState("");
 
   const updatePantry = async () => {
     const snapshot = query(collection(firestore, "pantry"));
@@ -102,7 +103,6 @@ export default function Home() {
         quantity: doc.data().quantity || 1,
       });
     });
-    console.log(pantryList);
     setPantry(pantryList);
   };
 
@@ -135,6 +135,10 @@ export default function Home() {
       handleDeleteItem(id);
     }
   };
+
+  const filteredPantry = pantry.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Box
@@ -203,12 +207,14 @@ export default function Home() {
           <StyledInputBase
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </Search>
       </Box>
 
       <Stack width="800px" height="600px" spacing={2} overflow="auto">
-        {pantry.map((item) => (
+        {filteredPantry.map((item) => (
           <Box
             key={item.id}
             width="100%"
