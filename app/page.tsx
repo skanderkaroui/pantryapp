@@ -150,33 +150,6 @@ export default function Home() {
       alignItems="center"
       gap={2}
     >
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Add item
-          </Typography>
-          <Stack width="100%" direction={"row"} spacing={2}>
-            <TextField
-              id="outlined-basic"
-              label="Item"
-              variant="outlined"
-              value={itemName}
-              onChange={(e) => setItemName(e.target.value)}
-            />
-            <Button variant="outlined" onClick={handleAddItem}>
-              Add
-            </Button>
-          </Stack>
-        </Box>
-      </Modal>
-      <Button variant="contained" onClick={handleOpen}>
-        Add
-      </Button>
       <Box
         width="800px"
         height="100px"
@@ -211,6 +184,33 @@ export default function Home() {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </Search>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Add item
+            </Typography>
+            <Stack width="100%" direction={"row"} spacing={2}>
+              <TextField
+                id="outlined-basic"
+                label="Item"
+                variant="outlined"
+                value={itemName}
+                onChange={(e) => setItemName(e.target.value)}
+              />
+              <Button variant="outlined" onClick={handleAddItem}>
+                Add
+              </Button>
+            </Stack>
+          </Box>
+        </Modal>
+        <Button variant="contained" onClick={handleOpen}>
+          Add
+        </Button>
       </Box>
 
       <Stack width="800px" height="600px" spacing={2} overflow="auto">
