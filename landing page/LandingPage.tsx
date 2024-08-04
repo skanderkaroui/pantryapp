@@ -1,3 +1,5 @@
+"use state";
+
 import * as React from "react";
 import { PaletteMode } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
