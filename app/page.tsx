@@ -1,5 +1,7 @@
-import PantryPage from "@/app/PantryPage";
+"use client";
+
+import LandingPage from "@/landing page/LandingPage";
 
 export default function Home() {
-  return <PantryPage />;
+  return <LandingPage />;
 }
