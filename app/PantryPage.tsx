@@ -149,19 +149,21 @@ const PantryPage = () => {
       alignItems="center"
       gap={2}
     >
-      <Box
-        width="800px"
-        height="100px"
-        bgcolor="#ADD8E6"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        border="1px solid #333"
+      <Typography
+        variant="h1"
+        sx={{
+          fontSize: "80px",
+          fontWeight: 200,
+          color: "#b83f45",
+          textAlign: "center",
+          fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+          WebkitTextRendering: "optimizeLegibility",
+          MozTextRendering: "optimizeLegibility",
+          textRendering: "optimizeLegibility",
+        }}
       >
-        <Typography variant="h2" color="#333" textAlign="center">
-          Pantry Items
-        </Typography>
-      </Box>
+        Pantry Items
+      </Typography>
 
       <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
         <Chip
