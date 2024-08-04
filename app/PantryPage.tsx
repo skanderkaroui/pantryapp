@@ -165,7 +165,21 @@ const PantryPage = () => {
         Pantry Items
       </Typography>
 
-      <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        mb={2}
+        sx={{
+          "& .MuiChip-root": {
+            borderColor: "#b83f45",
+            color: "#b83f45",
+          },
+          "& .MuiSvgIcon-root": {
+            color: "#b83f45",
+          },
+        }}
+      >
         <Chip
           label={`Total Items: ${pantry.reduce(
             (sum, item) => sum + item.quantity,
@@ -209,7 +223,16 @@ const PantryPage = () => {
             </Stack>
           </Box>
         </Modal>
-        <Button variant="contained" onClick={handleOpen}>
+        <Button
+          variant="contained"
+          onClick={handleOpen}
+          sx={{
+            backgroundColor: "#b83f45",
+            "&:hover": {
+              backgroundColor: "#9a3238", // slightly darker shade for hover effect
+            },
+          }}
+        >
           Add
         </Button>
       </Box>
