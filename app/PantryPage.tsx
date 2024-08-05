@@ -175,9 +175,6 @@ const PantryPage = () => {
             borderColor: "#b83f45",
             color: "#b83f45",
           },
-          "& .MuiSvgIcon-root": {
-            color: "#b83f45",
-          },
         }}
       >
         <Chip
@@ -217,7 +214,17 @@ const PantryPage = () => {
                 value={itemName}
                 onChange={(e) => setItemName(e.target.value)}
               />
-              <Button variant="outlined" onClick={handleAddItem}>
+              <Button
+                variant="outlined"
+                onClick={handleAddItem}
+                sx={{
+                  borderColor: "#b83f45",
+                  color: "#b83f45",
+                  "&:hover": {
+                    borderColor: "#9a3238", // slightly darker shade for hover effect
+                  },
+                }}
+              >
                 Add
               </Button>
             </Stack>

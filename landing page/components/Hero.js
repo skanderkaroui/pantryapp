@@ -63,7 +63,7 @@ export default function Hero() {
             sx={{ alignSelf: "center", width: { sm: "100%", md: "80%" } }}
           >
             Explore our cutting-edge dashboard, in order to keep track of your
-            pantry items. Don't miss your chance to keep yourself organized.
+            pantry items. Don't miss your chance to keep yourself
           </Typography>
           <Stack
             direction={{ xs: "column", sm: "row" }}
