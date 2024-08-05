@@ -24,6 +24,8 @@ import { useEffect, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+import { Camera } from "react-camera-pro";
+import axios from "axios";
 
 const style = {
   position: "absolute" as "absolute",
@@ -87,6 +89,8 @@ const PantryPage = () => {
   const [open, setOpen] = useState(false);
   const [itemName, setItemName] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showCamera, setShowCamera] = useState(false);
+  const [camera, setCamera] = useState(null);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
