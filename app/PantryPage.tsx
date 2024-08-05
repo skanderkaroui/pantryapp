@@ -26,13 +26,15 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { Camera, CameraType } from "react-camera-pro";
 import axios from "axios";
+import { Height } from "@mui/icons-material";
 
 const style = {
   position: "absolute" as "absolute",
+  flex: "center",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: "500px",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -244,65 +246,106 @@ const PantryPage = () => {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Add item
-            </Typography>
-            <Stack width="100%" direction={"column"} spacing={2}>
-              <Stack width="100%" direction={"row"} spacing={2}>
-                <TextField
-                  id="outlined-basic"
-                  label="Item"
-                  variant="outlined"
-                  value={itemName}
-                  onChange={(e) => setItemName(e.target.value)}
-                />
-                <Button
-                  variant="outlined"
-                  onClick={handleAddItem}
-                  sx={{
-                    borderColor: "#b83f45",
-                    color: "#b83f45",
-                    "&:hover": {
-                      borderColor: "#9a3238",
-                    },
-                  }}
+            {!showCamera ? (
+              <>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Add item
+                </Typography>
+                <Stack
+                  width="100%"
+                  direction="column"
+                  spacing={2}
+                  sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }} // Make it fill available space
                 >
-                  Add
-                </Button>
-              </Stack>
-              <Button
-                variant="contained"
-                onClick={() => setShowCamera(true)}
-                sx={{
-                  backgroundColor: "#b83f45",
-                  "&:hover": {
-                    backgroundColor: "#9a3238",
-                  },
-                }}
-              >
-                Add with Camera
-              </Button>
-              {showCamera && (
-                <Box>
-                  <Camera
-                    ref={cameraRef}
-                    errorMessages={{
-                      noCameraAccessible:
-                        "No camera device accessible. Please connect your camera or try a different browser.",
-                      permissionDenied:
-                        "Permission denied. Please refresh and give camera permission.",
-                      switchCamera:
-                        "It is not possible to switch camera to different one because there is only one video device accessible.",
-                      canvas: "Canvas is not supported.",
+                  <Stack width="100%" direction="row" spacing={2}>
+                    <TextField
+                      id="outlined-basic"
+                      label="Item"
+                      variant="outlined"
+                      value={itemName}
+                      onChange={(e) => setItemName(e.target.value)}
+                    />
+                    <Button
+                      variant="outlined"
+                      onClick={handleAddItem}
+                      sx={{
+                        borderColor: "#b83f45",
+                        color: "#b83f45",
+                        "&:hover": {
+                          borderColor: "#9a3238",
+                        },
+                      }}
+                    >
+                      Add
+                    </Button>
+                  </Stack>
+                  <Box sx={{ mt: "auto" }}>
+                    {" "}
+                    {/* Pushes the button to the bottom */}
+                    <Button
+                      variant="contained"
+                      onClick={() => setShowCamera(true)}
+                      sx={{
+                        backgroundColor: "#b83f45",
+                        "&:hover": {
+                          backgroundColor: "#9a3238",
+                        },
+                      }}
+                    >
+                      Add with Camera
+                    </Button>
+                  </Box>
+                </Stack>
+              </>
+            ) : (
+              <Box>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Capture Item
+                </Typography>
+                <Camera
+                  ref={cameraRef}
+                  errorMessages={{
+                    noCameraAccessible:
+                      "No camera device accessible. Please connect your camera or try a different browser.",
+                    permissionDenied:
+                      "Permission denied. Please refresh and give camera permission.",
+                    switchCamera:
+                      "It is not possible to switch camera to different one because there is only one video device accessible.",
+                    canvas: "Canvas is not supported.",
+                  }}
+                  numberOfCamerasCallback={(i: number) => console.log(i)}
+                  videoReadyCallback={() => console.log("Video feed ready.")}
+                  facingMode="environment"
+                />
+                <Stack direction="row" spacing={2} mt={2}>
+                  <Button
+                    variant="contained"
+                    onClick={handleCameraCapture}
+                    sx={{
+                      backgroundColor: "#b83f45",
+                      "&:hover": {
+                        backgroundColor: "#9a3238",
+                      },
                     }}
-                    numberOfCamerasCallback={(i: number) => console.log(i)}
-                    videoReadyCallback={() => console.log("Video feed ready.")}
-                    facingMode="environment"
-                  />
-                  <Button onClick={handleCameraCapture}>Capture and Add</Button>
-                </Box>
-              )}
-            </Stack>
+                  >
+                    Capture and Add
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => setShowCamera(false)}
+                    sx={{
+                      borderColor: "#b83f45",
+                      color: "#b83f45",
+                      "&:hover": {
+                        borderColor: "#9a3238",
+                      },
+                    }}
+                  >
+                    Back to Manual Input
+                  </Button>
+                </Stack>
+              </Box>
+            )}
           </Box>
         </Modal>
         <Button
