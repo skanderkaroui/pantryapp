@@ -25,13 +25,11 @@ import { Camera, CameraType } from "react-camera-pro";
 import axios from "axios";
 import { Height } from "@mui/icons-material";
 
-const style = {
+const baseStyle = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "600px",
-  height: "450px",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -40,6 +38,18 @@ const style = {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
+};
+
+const style = {
+  ...baseStyle,
+  width: "600px",
+  height: "450px",
+};
+
+const style1 = {
+  ...baseStyle,
+  width: "400px", // Smaller width
+  height: "300px", // Smaller height
 };
 
 const Search = styled("div")(({ theme }) => ({
