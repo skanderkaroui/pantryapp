@@ -154,10 +154,21 @@ const PantryPage = () => {
 
   const handleAddItem = async () => {
     if (itemName.trim() !== "") {
-      await addDoc(collection(firestore, "pantry"), {
-        name: itemName.trim(),
-        quantity: 1,
-      });
+      const existingItem = pantry.find(
+        (item) => item.name.toLowerCase() === itemName.trim().toLowerCase()
+      );
+
+      if (existingItem) {
+        await updateDoc(doc(firestore, "pantry", existingItem.id), {
+          quantity: existingItem.quantity + 1,
+        });
+        updatePantry();
+      } else {
+        await addDoc(collection(firestore, "pantry"), {
+          name: itemName.trim(),
+          quantity: 1,
+        });
+      }
       setItemName("");
       handleClose();
       updatePantry();
