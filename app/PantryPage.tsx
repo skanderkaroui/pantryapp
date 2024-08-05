@@ -8,6 +8,7 @@ import {
   query,
   updateDoc,
 } from "@firebase/firestore";
+import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
   Button,
@@ -17,13 +18,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState, useRef } from "react";
-import { styled, alpha } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import { Camera, CameraType } from "react-camera-pro";
+import { alpha, styled } from "@mui/material/styles";
 import axios from "axios";
-import { Height } from "@mui/icons-material";
+import { useEffect, useRef, useState } from "react";
+import { Camera, CameraType } from "react-camera-pro";
 
 const baseStyle = {
   position: "absolute" as "absolute",
