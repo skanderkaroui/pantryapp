@@ -20,11 +20,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import { Camera } from "react-camera-pro";
+import { Camera, CameraType } from "react-camera-pro";
 import axios from "axios";
 
 const style = {
@@ -91,9 +91,13 @@ const PantryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showCamera, setShowCamera] = useState(false);
   const [camera, setCamera] = useState(null);
+  const cameraRef = useRef<CameraType | null>(null);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setShowCamera(false);
+  };
 
   const updatePantry = async () => {
     const snapshot = query(collection(firestore, "pantry"));
@@ -107,6 +111,39 @@ const PantryPage = () => {
       });
     });
     setPantry(pantryList);
+  };
+
+  const handleCameraCapture = async () => {
+    if (cameraRef.current) {
+      const photo = cameraRef.current.takePhoto();
+      try {
+        const response = await axios.post(
+          "YOUR_AZURE_OPENAI_API_ENDPOINT",
+          {
+            image: photo,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer YOUR_AZURE_OPENAI_API_KEY",
+            },
+          }
+        );
+
+        // Assuming the API returns an object with an 'item' property
+        const newItem = response.data.item;
+
+        await addDoc(collection(firestore, "pantry"), {
+          name: newItem,
+          quantity: 1,
+        });
+
+        updatePantry();
+        setShowCamera(false);
+      } catch (error) {
+        console.error("Error processing image:", error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -210,27 +247,61 @@ const PantryPage = () => {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Add item
             </Typography>
-            <Stack width="100%" direction={"row"} spacing={2}>
-              <TextField
-                id="outlined-basic"
-                label="Item"
-                variant="outlined"
-                value={itemName}
-                onChange={(e) => setItemName(e.target.value)}
-              />
+            <Stack width="100%" direction={"column"} spacing={2}>
+              <Stack width="100%" direction={"row"} spacing={2}>
+                <TextField
+                  id="outlined-basic"
+                  label="Item"
+                  variant="outlined"
+                  value={itemName}
+                  onChange={(e) => setItemName(e.target.value)}
+                />
+                <Button
+                  variant="outlined"
+                  onClick={handleAddItem}
+                  sx={{
+                    borderColor: "#b83f45",
+                    color: "#b83f45",
+                    "&:hover": {
+                      borderColor: "#9a3238",
+                    },
+                  }}
+                >
+                  Add
+                </Button>
+              </Stack>
               <Button
-                variant="outlined"
-                onClick={handleAddItem}
+                variant="contained"
+                onClick={() => setShowCamera(true)}
                 sx={{
-                  borderColor: "#b83f45",
-                  color: "#b83f45",
+                  backgroundColor: "#b83f45",
                   "&:hover": {
-                    borderColor: "#9a3238", // slightly darker shade for hover effect
+                    backgroundColor: "#9a3238",
                   },
                 }}
               >
-                Add
+                Add with Camera
               </Button>
+              {showCamera && (
+                <Box>
+                  <Camera
+                    ref={cameraRef}
+                    errorMessages={{
+                      noCameraAccessible:
+                        "No camera device accessible. Please connect your camera or try a different browser.",
+                      permissionDenied:
+                        "Permission denied. Please refresh and give camera permission.",
+                      switchCamera:
+                        "It is not possible to switch camera to different one because there is only one video device accessible.",
+                      canvas: "Canvas is not supported.",
+                    }}
+                    numberOfCamerasCallback={(i: number) => console.log(i)}
+                    videoReadyCallback={() => console.log("Video feed ready.")}
+                    facingMode="environment"
+                  />
+                  <Button onClick={handleCameraCapture}>Capture and Add</Button>
+                </Box>
+              )}
             </Stack>
           </Box>
         </Modal>
