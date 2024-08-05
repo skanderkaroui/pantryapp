@@ -1,6 +1,3 @@
-// components/PantryPage.tsx
-"use client";
-
 import { firestore } from "@/firebase";
 import {
   addDoc,
