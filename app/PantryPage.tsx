@@ -253,8 +253,10 @@ const PantryPage = () => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            bgcolor="#f0f0f0"
+            bgcolor="rgba(0, 0, 0, .003)"
             padding="0 20px"
+            border="None"
+            boxShadow="inset 0 -2px 1px rgba(0, 0, 0, .03)"
           >
             <Typography variant="h3" color="#333">
               {item.name
