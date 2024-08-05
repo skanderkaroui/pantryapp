@@ -248,17 +248,26 @@ const PantryPage = () => {
         {filteredPantry.map((item) => (
           <Box
             key={item.id}
-            width="100%"
-            minHeight="100px"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            bgcolor="rgba(0, 0, 0, .003)"
-            padding="0 20px"
-            border="None"
-            boxShadow="inset 0 -2px 1px rgba(0, 0, 0, .03)"
+            sx={{
+              width: "100%",
+              minHeight: "100px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              bgcolor: "rgba(0, 0, 0, .003)",
+              padding: "0 20px",
+              border: "none",
+              boxShadow: "inset 0 -2px 1px rgba(0, 0, 0, .03)",
+              transition: "box-shadow 0.3s ease-in-out", // Smooth transition for the shadow change
+              "&:hover": {
+                boxShadow: "inset 0 -3px 2px rgba(0, 0, 0, .1)", // More pronounced shadow on hover
+              },
+              "&:active": {
+                boxShadow: "inset 0 -4px 3px rgba(0, 0, 0, .15)", // Even more pronounced shadow when clicked
+              },
+            }}
           >
-            <Typography variant="h3" color="#333">
+            <Typography variant="h3" color="#333" sx={{ fontSize: "2.45rem" }}>
               {item.name
                 ? item.name.charAt(0).toUpperCase() + item.name.slice(1)
                 : "Unnamed Item"}
