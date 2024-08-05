@@ -30,15 +30,19 @@ import { Height } from "@mui/icons-material";
 
 const style = {
   position: "absolute" as "absolute",
-  flex: "center",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "500px",
+  width: "600px",
+  height: "450px",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 const Search = styled("div")(({ theme }) => ({
