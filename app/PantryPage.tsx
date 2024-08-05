@@ -262,56 +262,68 @@ const PantryPage = () => {
         >
           <Box sx={style}>
             {!showCamera ? (
-              <>
+              <Stack
+                width="100%"
+                height="100%" // Make the Stack fill the modal
+                direction="column"
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
+              >
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Add item
                 </Typography>
                 <Stack
-                  width="100%"
-                  direction="column"
+                  direction="row"
                   spacing={2}
-                  sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }} // Make it fill available space
+                  alignItems="center"
+                  sx={{ width: "60%" }} // Ensure this Stack takes the full width
                 >
-                  <Stack width="100%" direction="row" spacing={2}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Item"
-                      variant="outlined"
-                      value={itemName}
-                      onChange={(e) => setItemName(e.target.value)}
-                    />
-                    <Button
-                      variant="outlined"
-                      onClick={handleAddItem}
-                      sx={{
-                        borderColor: "#b83f45",
-                        color: "#b83f45",
-                        "&:hover": {
-                          borderColor: "#9a3238",
-                        },
-                      }}
-                    >
-                      Add
-                    </Button>
-                  </Stack>
-                  <Box sx={{ mt: "auto" }}>
-                    <Button
-                      variant="contained"
-                      onClick={() => setShowCamera(true)}
-                      sx={{
-                        backgroundColor: "#b83f45",
-                        "&:hover": {
-                          backgroundColor: "#9a3238",
-                        },
-                      }}
-                    >
-                      Add with Camera
-                    </Button>
-                  </Box>
+                  <TextField
+                    id="outlined-basic"
+                    label="Item"
+                    variant="outlined"
+                    value={itemName}
+                    onChange={(e) => setItemName(e.target.value)}
+                    sx={{ flexGrow: 1 }} // Allow TextField to grow and fill available space
+                  />
+                  <Button
+                    variant="outlined"
+                    onClick={handleAddItem}
+                    sx={{
+                      borderColor: "#b83f45",
+                      color: "#b83f45",
+                      "&:hover": {
+                        borderColor: "#9a3238",
+                      },
+                    }}
+                  >
+                    Add
+                  </Button>
                 </Stack>
-              </>
+                <Button
+                  variant="contained"
+                  onClick={() => setShowCamera(true)}
+                  sx={{
+                    backgroundColor: "#b83f45",
+                    "&:hover": {
+                      backgroundColor: "#9a3238",
+                    },
+                    mt: 2, // Add margin-top for spacing from previous elements
+                  }}
+                >
+                  Add with Camera
+                </Button>
+              </Stack>
             ) : (
-              <Box>
+              <Stack
+                width="100%"
+                height="100%" // Make the Stack fill the modal
+                direction="column"
+                spacing={2}
+                alignItems="center"
+                justifyContent="center"
+              >
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Capture Item
                 </Typography>
@@ -330,7 +342,12 @@ const PantryPage = () => {
                   videoReadyCallback={() => console.log("Video feed ready.")}
                   facingMode="environment"
                 />
-                <Stack direction="row" spacing={2} mt={2}>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
+                  sx={{ mt: 2 }} // Add margin-top for spacing from Camera
+                >
                   <Button
                     variant="contained"
                     onClick={handleCameraCapture}
@@ -357,7 +374,7 @@ const PantryPage = () => {
                     Back to Manual Input
                   </Button>
                 </Stack>
-              </Box>
+              </Stack>
             )}
           </Box>
         </Modal>
