@@ -267,11 +267,11 @@ const PantryPage = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box sx={showCamera ? style : style1}>
             {!showCamera ? (
               <Stack
                 width="100%"
-                height="100%" // Make the Stack fill the modal
+                height="100%"
                 direction="column"
                 spacing={2}
                 alignItems="center"
@@ -284,7 +284,7 @@ const PantryPage = () => {
                   direction="row"
                   spacing={2}
                   alignItems="center"
-                  sx={{ width: "60%" }} // Ensure this Stack takes the full width
+                  sx={{ width: "100%" }}
                 >
                   <TextField
                     id="outlined-basic"
@@ -292,7 +292,7 @@ const PantryPage = () => {
                     variant="outlined"
                     value={itemName}
                     onChange={(e) => setItemName(e.target.value)}
-                    sx={{ flexGrow: 1 }} // Allow TextField to grow and fill available space
+                    sx={{ flexGrow: 1 }}
                   />
                   <Button
                     variant="outlined"
@@ -316,7 +316,7 @@ const PantryPage = () => {
                     "&:hover": {
                       backgroundColor: "#9a3238",
                     },
-                    mt: 2, // Add margin-top for spacing from previous elements
+                    mt: 2,
                   }}
                 >
                   Add with Camera
@@ -325,7 +325,7 @@ const PantryPage = () => {
             ) : (
               <Stack
                 width="100%"
-                height="100%" // Make the Stack fill the modal
+                height="100%"
                 direction="column"
                 spacing={2}
                 alignItems="center"
@@ -353,7 +353,7 @@ const PantryPage = () => {
                   direction="row"
                   spacing={2}
                   alignItems="center"
-                  sx={{ mt: 2 }} // Add margin-top for spacing from Camera
+                  sx={{ mt: 2 }}
                 >
                   <Button
                     variant="contained"
