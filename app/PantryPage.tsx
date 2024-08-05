@@ -295,8 +295,6 @@ const PantryPage = () => {
                     </Button>
                   </Stack>
                   <Box sx={{ mt: "auto" }}>
-                    {" "}
-                    {/* Pushes the button to the bottom */}
                     <Button
                       variant="contained"
                       onClick={() => setShowCamera(true)}
