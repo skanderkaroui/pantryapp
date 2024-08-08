@@ -1,6 +1,6 @@
 # Pantry App Tracker
 
-This is a Pantry App Tracker built using [Next.js](https://nextjs.org/) and [React](https://reactjs.org/), connected with [Firebase](https://firebase.google.com/), and deployed on [Vercel](https://vercel.com/). This project is part of Headstarter Fellowship!
+This is a Pantry App Tracker built using [Next.js](https://nextjs.org/) and [React](https://reactjs.org/), connected with [Firebase](https://firebase.google.com/), and deployed on [Vercel](https://vercel.com/).
 
 ## Getting Started
 
