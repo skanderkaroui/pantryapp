@@ -21,6 +21,7 @@ import {
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import axios from "axios";
+import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { Camera, CameraType } from "react-camera-pro";
 
@@ -213,6 +214,13 @@ const PantryPage = () => {
       alignItems="center"
       gap={2}
     >
+      <Head>
+        <title>Pantry Tracker - My App</title>
+        <meta
+          name="description"
+          content="Manage and track your pantry items effectively."
+        />
+      </Head>
       <Typography
         variant="h1"
         sx={{
