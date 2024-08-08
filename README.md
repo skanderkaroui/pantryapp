@@ -30,48 +30,16 @@ The app is deployed on Vercel and can be accessed at https://pantryapp-pi.vercel
 
 ## To Do
 
-<ul>
-        <li>
-            <input type="checkbox" id="task1" checked>
-            <label for="task1">Set up a Next.js project with Material UI components</label>
-        </li>
-        <li>
-            <input type="checkbox" id="task2" checked>
-            <label for="task2">Implement a Firebase backend for data storage</label>
-        </li>
-        <li>
-            <input type="checkbox" id="task3" checked>
-            <label for="task3">Create a form to add, delete, and update pantry items</label>
-        </li>
-        <li>
-            <input type="checkbox" id="task4" checked>
-            <label for="task4">Add a search or filter functionality to easily find items</label>
-        </li>
-        <li>
-            <input type="checkbox" id="task5" checked>
-            <label for="task5">Create a presentable frontend design to display all pantry items</label>
-        </li>
-        <li>
-            <input type="checkbox" id="task6" checked>
-            <label for="task6">Deploy to Vercel and use CI/CD</label>
-        </li>
-        <li>
-            <input type="checkbox" id="bonus1" checked>
-            <label for="bonus1">Take images with mobile or browser camera and upload to Firebase</label>
-        </li>
-        <li>
-            <input type="checkbox" id="bonus2">
-            <label for="bonus2">Use GPT Vision API or other LLMs to classify images and then update to Firebase</label>
-        </li>
-        <li>
-            <input type="checkbox" id="bonus3">
-            <label for="bonus3">Use GCP Vertex AI and AutoML to classify 4-5 images of items near you and update Firebase</label>
-        </li>
-        <li>
-            <input type="checkbox" id="bonus4">
-            <label for="bonus4">Add a recipe suggestion feature based on pantry contents using the OpenAI API or OpenRouter API</label>
-        </li>
-    </ul>
+- [x] Set up a Next.js project with Material UI components
+- [x] Implement a Firebase backend for data storage
+- [x] Create a form to add, delete, and update pantry items
+- [x] Add a search or filter functionality to easily find items
+- [x] Create a presentable frontend design to display all pantry items
+- [x] Deploy to Vercel and use CI/CD
+- [x] Take images with mobile or browser camera and upload to Firebase
+- [ ] Use GPT Vision API or other LLMs to classify images and then update to Firebase
+- [ ] Use GCP Vertex AI and AutoML to classify 4-5 images of items near you and update Firebase
+- [ ] Add a recipe suggestion feature based on pantry contents using the OpenAI API or OpenRouter API
 
 ## Feedback
 
