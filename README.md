@@ -30,13 +30,13 @@ The app is deployed on Vercel and can be accessed at https://pantryapp-pi.vercel
 
 ## To Do
 
-- ~~[x] Set up a Next.js project with Material UI components~~
-- ~~[x] Implement a Firebase backend for data storage~~
-- ~~[x] Create a form to add, delete, and update pantry items~~
-- ~~[x] Add a search or filter functionality to easily find items~~
-- ~~[x] Create a presentable frontend design to display all pantry items~~
-- ~~[x] Deploy to Vercel and use CI/CD~~
-- ~~[x] Take images with mobile or browser camera and upload to Firebase~~
+- [x] Set up a Next.js project with Material UI components
+- [x] Implement a Firebase backend for data storage
+- [x] Create a form to add, delete, and update pantry items
+- [x] Add a search or filter functionality to easily find items
+- [x] Create a presentable frontend design to display all pantry items
+- [x] Deploy to Vercel and use CI/CD
+- [x] Take images with mobile or browser camera and upload to Firebase
 - [ ] Use GPT Vision API or other LLMs to classify images and then update to Firebase
 - [ ] Use GCP Vertex AI and AutoML to classify 4-5 images of items near you and update Firebase
 - [ ] Add a recipe suggestion feature based on pantry contents using the OpenAI API or OpenRouter API
